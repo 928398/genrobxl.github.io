@@ -13,65 +13,66 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            display: flex;
+            padding-bottom: 80px;
         }
 
-        .sidebar {
-            width: 250px;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px 0;
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 100%);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+            border-top: 2px solid rgba(138, 99, 210, 0.3);
+            z-index: 100;
+        }
+
+        .nav-btn {
+            flex: 1;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+            background: none;
+            border: none;
+            color: #8a8a8a;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
         }
 
-        .logo {
-            padding: 0 20px 20px;
-            border-bottom: 2px solid #667eea;
-            margin-bottom: 20px;
+        .nav-btn.active {
+            color: #8a63d2;
+            background: rgba(138, 99, 210, 0.1);
         }
 
-        .logo h2 {
-            color: #667eea;
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-icon {
             font-size: 24px;
         }
 
-        .nav-item {
-            padding: 15px 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-left: 4px solid transparent;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .nav-item:hover {
-            background: rgba(102, 126, 234, 0.1);
-            border-left-color: #667eea;
-        }
-
-        .nav-item.active {
-            background: rgba(102, 126, 234, 0.2);
-            border-left-color: #667eea;
-            color: #667eea;
+        .nav-label {
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .content {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .page {
             display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .page.active {
@@ -91,167 +92,155 @@
         }
 
         h1 {
-            color: #667eea;
-            margin-bottom: 30px;
-            font-size: 32px;
+            color: #8a63d2;
+            margin-bottom: 25px;
+            font-size: 26px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(138, 99, 210, 0.3);
         }
 
         .generator-box {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2d1b3d 0%, #1f1f3a 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(138, 99, 210, 0.2);
         }
 
         .generator-box h3 {
-            color: #333;
+            color: #9d7cd8;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-text {
+            color: #b8b8d1;
+            line-height: 1.6;
             margin-bottom: 20px;
-            font-size: 20px;
+            font-size: 14px;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #5e3a8f 0%, #8a63d2 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 14px 30px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-right: 10px;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(138, 99, 210, 0.3);
         }
 
         .btn:active {
-            transform: translateY(0);
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(138, 99, 210, 0.4);
         }
 
         .link-display {
             display: none;
             margin-top: 20px;
             padding: 15px;
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
+            background: rgba(21, 21, 43, 0.8);
+            border: 2px solid #5e3a8f;
+            border-radius: 10px;
             word-break: break-all;
         }
 
         .link-display.show {
             display: block;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .link-text {
-            color: #667eea;
+            color: #8a63d2;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            padding: 10px;
+            background: rgba(138, 99, 210, 0.1);
+            border-radius: 8px;
         }
 
         .copy-btn {
-            background: #28a745;
-            padding: 8px 20px;
+            background: linear-gradient(135deg, #5d4e6e 0%, #6b5b7b 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
             font-size: 14px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
         }
 
-        .copy-btn:hover {
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        .copy-btn:active {
+            transform: scale(0.98);
         }
 
         .copy-btn.copied {
-            background: #218838;
-        }
-
-        .info-text {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a7c59 0%, #5a9279 100%);
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <h2>🎮 Roblox Tools</h2>
-        </div>
-        <div class="nav-item active" onclick="showPage('communaute')">Communauté</div>
-        <div class="nav-item" onclick="showPage('profil')">Profil</div>
-        <div class="nav-item" onclick="showPage('apropos')">À propos</div>
-        <div class="nav-item" onclick="showPage('aide')">Aide</div>
-    </div>
-
     <div class="content">
         <!-- Page Communauté -->
         <div class="page active" id="communaute">
-            <h1>Générateur de Lien Communauté Roblox</h1>
+            <h1>🎮 Communauté Roblox</h1>
             <div class="generator-box">
-                <h3>📱 Générer un site communauté Roblox</h3>
-                <p class="info-text">Cliquez sur le bouton ci-dessous pour générer un lien vers la communauté Roblox.</p>
+                <h3>📱 Générer un site communauté</h3>
+                <p class="info-text">Cliquez pour générer un lien vers la communauté Roblox.</p>
                 <button class="btn" onclick="generateCommunityLink()">Générer</button>
                 
                 <div class="link-display" id="communityLinkDisplay">
                     <div class="link-text" id="communityLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('community')">📋 Copier</button>
+                    <button class="copy-btn" onclick="copyToClipboard('community')">📋 Copier le lien</button>
                 </div>
             </div>
         </div>
 
         <!-- Page Profil -->
         <div class="page" id="profil">
-            <h1>Générateur de Lien Profil Roblox</h1>
+            <h1>👤 Profil Roblox</h1>
             <div class="generator-box">
-                <h3>👤 Générer un profil Roblox</h3>
-                <p class="info-text">Cliquez sur le bouton ci-dessous pour générer un lien vers un profil Roblox.</p>
+                <h3>🔗 Générer un profil</h3>
+                <p class="info-text">Cliquez pour générer un lien vers un profil Roblox.</p>
                 <button class="btn" onclick="generateProfileLink()">Générer</button>
                 
                 <div class="link-display" id="profileLinkDisplay">
                     <div class="link-text" id="profileLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('profile')">📋 Copier</button>
+                    <button class="copy-btn" onclick="copyToClipboard('profile')">📋 Copier le lien</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Page À propos -->
-        <div class="page" id="apropos">
-            <h1>À propos</h1>
-            <div class="generator-box">
-                <h3>ℹ️ Informations</h3>
-                <p class="info-text">
-                    Cet outil vous permet de générer facilement des liens vers des communautés et profils Roblox.
-                    Utilisez les différentes pages de la navigation pour accéder aux générateurs.
-                </p>
-                <p class="info-text">
-                    <strong>Fonctionnalités :</strong><br>
-                    • Générateur de liens communauté Roblox<br>
-                    • Générateur de liens profil Roblox<br>
-                    • Bouton de copie en un clic<br>
-                    • Interface simple et intuitive
-                </p>
-            </div>
-        </div>
-
-        <!-- Page Aide -->
-        <div class="page" id="aide">
-            <h1>Aide</h1>
-            <div class="generator-box">
-                <h3>❓ Comment utiliser ce site</h3>
-                <p class="info-text">
-                    <strong>1. Navigation :</strong><br>
-                    Utilisez le menu à gauche pour naviguer entre les différentes pages.
-                </p>
-                <p class="info-text">
-                    <strong>2. Générer un lien :</strong><br>
-                    Cliquez sur le bouton "Générer" pour créer un lien Roblox.
-                </p>
-                <p class="info-text">
-                    <strong>3. Copier le lien :</strong><br>
-                    Une fois le lien généré, cliquez sur "Copier" pour le copier dans votre presse-papiers.
-                </p>
-            </div>
-        </div>
+    <!-- Navbar en bas -->
+    <div class="navbar">
+        <button class="nav-btn active" onclick="showPage('communaute')">
+            <div class="nav-icon">🎮</div>
+            <div class="nav-label">Communauté</div>
+        </button>
+        <button class="nav-btn" onclick="showPage('profil')">
+            <div class="nav-icon">👤</div>
+            <div class="nav-label">Profil</div>
+        </button>
     </div>
 
     <script>
@@ -261,16 +250,16 @@
                 page.classList.remove('active');
             });
             
-            // Désactiver tous les items de navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
+            // Désactiver tous les boutons de navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
             
             // Afficher la page sélectionnée
             document.getElementById(pageId).classList.add('active');
             
-            // Activer l'item de navigation correspondant
-            event.target.classList.add('active');
+            // Activer le bouton correspondant
+            event.currentTarget.classList.add('active');
         }
 
         function generateCommunityLink() {
@@ -287,14 +276,12 @@
 
         function copyToClipboard(type) {
             let text;
-            let button;
+            let button = event.target;
             
             if (type === 'community') {
                 text = document.getElementById('communityLink').textContent;
-                button = event.target;
             } else {
                 text = document.getElementById('profileLink').textContent;
-                button = event.target;
             }
             
             navigator.clipboard.writeText(text).then(() => {
@@ -310,5 +297,4 @@
         }
     </script>
 </body>
-  </html>
-
+</html>
