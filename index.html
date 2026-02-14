@@ -196,6 +196,166 @@
         .copy-btn.copied {
             background: linear-gradient(135deg, #4a7c59 0%, #5a9279 100%);
         }
+
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            flex: 1;
+            background: linear-gradient(135deg, #2d1b3d 0%, #1f1f3a 100%);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(138, 99, 210, 0.2);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8a63d2;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #b8b8d1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #3d2952 0%, #2a2a4a 100%);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(138, 99, 210, 0.3);
+            margin-top: 20px;
+        }
+
+        .tip-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            color: #d0d0e8;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .platform-section {
+            background: linear-gradient(135deg, #2d1b3d 0%, #1f1f3a 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(138, 99, 210, 0.2);
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(138, 99, 210, 0.2);
+        }
+
+        .platform-icon {
+            font-size: 24px;
+        }
+
+        .platform-header h3 {
+            color: #9d7cd8;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .platform-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .platform-item {
+            background: rgba(21, 21, 43, 0.6);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(138, 99, 210, 0.15);
+        }
+
+        .platform-label {
+            color: #8a63d2;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .platform-link {
+            color: #b8b8d1;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            word-break: break-all;
+            border-left: 3px solid #5e3a8f;
+        }
+
+        .platform-btn {
+            margin-top: 5px;
+        }
+
+        .platform-note {
+            color: #9d9db8;
+            font-size: 12px;
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(138, 99, 210, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid #8a63d2;
+        }
+
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tip-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            color: #b8b8d1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .tip-bullet {
+            color: #8a63d2;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .btn:active {
+            animation: pulse 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -203,29 +363,175 @@
         <!-- Page Communauté -->
         <div class="page active" id="communaute">
             <h1>🎮 Communauté Roblox</h1>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="generatedCount">0</div>
+                    <div class="stat-label">Générés</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="copiedCount">0</div>
+                    <div class="stat-label">Copiés</div>
+                </div>
+            </div>
+
             <div class="generator-box">
                 <h3>📱 Générer un site communauté</h3>
                 <p class="info-text">Cliquez pour générer un lien vers la communauté Roblox.</p>
-                <button class="btn" onclick="generateCommunityLink()">Générer</button>
+                <button class="btn" onclick="generateCommunityLink()">✨ Générer</button>
                 
                 <div class="link-display" id="communityLinkDisplay">
                     <div class="link-text" id="communityLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('community')">📋 Copier le lien</button>
+                    <button class="copy-btn" onclick="copyToClipboard('community', 'www.roblox.com/community/17463')">📋 Copier le lien</button>
                 </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">💡</div>
+                <div class="tip-text">Besoin d'un format spécial ? Consultez la page Info !</div>
             </div>
         </div>
 
         <!-- Page Profil -->
         <div class="page" id="profil">
             <h1>👤 Profil Roblox</h1>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="generatedCountProfile">0</div>
+                    <div class="stat-label">Générés</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="copiedCountProfile">0</div>
+                    <div class="stat-label">Copiés</div>
+                </div>
+            </div>
+
             <div class="generator-box">
                 <h3>🔗 Générer un profil</h3>
                 <p class="info-text">Cliquez pour générer un lien vers un profil Roblox.</p>
-                <button class="btn" onclick="generateProfileLink()">Générer</button>
+                <button class="btn" onclick="generateProfileLink()">✨ Générer</button>
                 
                 <div class="link-display" id="profileLinkDisplay">
                     <div class="link-text" id="profileLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('profile')">📋 Copier le lien</button>
+                    <button class="copy-btn" onclick="copyToClipboard('profile', 'www.roblox.com/profil/74635')">📋 Copier le lien</button>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-icon">💡</div>
+                <div class="tip-text">Pour partager sur Discord ou Snap, voir la page Info !</div>
+            </div>
+        </div>
+
+        <!-- Page Info -->
+        <div class="page" id="info">
+            <h1>ℹ️ Infos & Plateformes</h1>
+            
+            <div class="generator-box">
+                <h3>📲 Comment adapter les liens</h3>
+                <p class="info-text">Chaque plateforme a son propre format de lien. Utilisez les boutons ci-dessous pour copier directement le bon format !</p>
+            </div>
+
+            <div class="platform-section">
+                <div class="platform-header">
+                    <span class="platform-icon">💬</span>
+                    <h3>Discord</h3>
+                </div>
+                <div class="platform-content">
+                    <div class="platform-item">
+                        <div class="platform-label">Communauté</div>
+                        <div class="platform-link">**www.roblox.com/community/72635**</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('discord-community', '**www.roblox.com/community/72635**')">📋 Copier</button>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-label">Profil</div>
+                        <div class="platform-link">**www.roblox.com/profil/74635**</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('discord-profile', '**www.roblox.com/profil/74635**')">📋 Copier</button>
+                    </div>
+                    <p class="platform-note">💡 Les ** permettent de mettre le texte en gras sur Discord</p>
+                </div>
+            </div>
+
+            <div class="platform-section">
+                <div class="platform-header">
+                    <span class="platform-icon">👻</span>
+                    <h3>Snapchat</h3>
+                </div>
+                <div class="platform-content">
+                    <div class="platform-item">
+                        <div class="platform-label">Communauté</div>
+                        <div class="platform-link">_www.roblox.com/community/17463_</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('snap-community', '_www.roblox.com/community/17463_')">📋 Copier</button>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-label">Profil</div>
+                        <div class="platform-link">_www.roblox.com/profil/74635_</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('snap-profile', '_www.roblox.com/profil/74635_')">📋 Copier</button>
+                    </div>
+                    <p class="platform-note">💡 Les _ permettent de mettre le texte en italique sur Snapchat</p>
+                </div>
+            </div>
+
+            <div class="platform-section">
+                <div class="platform-header">
+                    <span class="platform-icon">📱</span>
+                    <h3>Instagram</h3>
+                </div>
+                <div class="platform-content">
+                    <div class="platform-item">
+                        <div class="platform-label">Communauté</div>
+                        <div class="platform-link">www.roblox.com/community/17463</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('insta-community', 'www.roblox.com/community/17463')">📋 Copier</button>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-label">Profil</div>
+                        <div class="platform-link">www.roblox.com/profil/74635</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('insta-profile', 'www.roblox.com/profil/74635')">📋 Copier</button>
+                    </div>
+                    <p class="platform-note">💡 Format standard pour Instagram</p>
+                </div>
+            </div>
+
+            <div class="platform-section">
+                <div class="platform-header">
+                    <span class="platform-icon">✈️</span>
+                    <h3>Telegram</h3>
+                </div>
+                <div class="platform-content">
+                    <div class="platform-item">
+                        <div class="platform-label">Communauté</div>
+                        <div class="platform-link">[Communauté](www.roblox.com/community/17463)</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('telegram-community', '[Communauté](www.roblox.com/community/17463)')">📋 Copier</button>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-label">Profil</div>
+                        <div class="platform-link">[Profil](www.roblox.com/profil/74635)</div>
+                        <button class="copy-btn platform-btn" onclick="copyToClipboard('telegram-profile', '[Profil](www.roblox.com/profil/74635)')">📋 Copier</button>
+                    </div>
+                    <p class="platform-note">💡 Format Markdown pour Telegram</p>
+                </div>
+            </div>
+
+            <div class="generator-box">
+                <h3>🎯 Conseils d'utilisation</h3>
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <span class="tip-bullet">•</span>
+                        <span>Chaque plateforme a son propre format de texte</span>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-bullet">•</span>
+                        <span>Utilisez toujours le bon format pour un affichage optimal</span>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-bullet">•</span>
+                        <span>Les numéros dans les liens sont des identifiants uniques</span>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-bullet">•</span>
+                        <span>Testez vos liens avant de les partager massivement</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -241,9 +547,18 @@
             <div class="nav-icon">👤</div>
             <div class="nav-label">Profil</div>
         </button>
+        <button class="nav-btn" onclick="showPage('info')">
+            <div class="nav-icon">ℹ️</div>
+            <div class="nav-label">Info</div>
+        </button>
     </div>
 
     <script>
+        let generatedCount = 0;
+        let copiedCount = 0;
+        let generatedCountProfile = 0;
+        let copiedCountProfile = 0;
+
         function showPage(pageId) {
             // Masquer toutes les pages
             document.querySelectorAll('.page').forEach(page => {
@@ -263,24 +578,29 @@
         }
 
         function generateCommunityLink() {
-            const link = 'https://928398.github.io/commu.github.io';
+            const link = 'www.roblox.com/community/17463';
             document.getElementById('communityLink').textContent = link;
             document.getElementById('communityLinkDisplay').classList.add('show');
+            
+            generatedCount++;
+            document.getElementById('generatedCount').textContent = generatedCount;
+            
+            // Animation du compteur
+            document.getElementById('generatedCountProfile').style.animation = 'none';
+            setTimeout(() => {
+                document.getElementById('generatedCountProfile').style.animation = 'pulse 0.3s ease';
+            }, 10);
         }
 
-        function generateProfileLink() {
-            const link = 'https://928398.github.io/commu.github.io';
-            document.getElementById('profileLink').textContent = link;
-            document.getElementById('profileLinkDisplay').classList.add('show');
-        }
-
-        function copyToClipboard(type) {
+        function copyToClipboard(type, customText = null) {
             let text;
             let button = event.target;
             
-            if (type === 'community') {
+            if (customText) {
+                text = customText;
+            } else if (type === 'community') {
                 text = document.getElementById('communityLink').textContent;
-            } else {
+            } else if (type === 'profile') {
                 text = document.getElementById('profileLink').textContent;
             }
             
@@ -289,12 +609,44 @@
                 button.textContent = '✓ Copié !';
                 button.classList.add('copied');
                 
+                // Mise à jour des compteurs
+                if (type === 'community' || type.includes('community')) {
+                    copiedCount++;
+                    document.getElementById('copiedCount').textContent = copiedCount;
+                    document.getElementById('copiedCount').style.animation = 'none';
+                    setTimeout(() => {
+                        document.getElementById('copiedCount').style.animation = 'pulse 0.3s ease';
+                    }, 10);
+                } else if (type === 'profile' || type.includes('profile')) {
+                    copiedCountProfile++;
+                    document.getElementById('copiedCountProfile').textContent = copiedCountProfile;
+                    document.getElementById('copiedCountProfile').style.animation = 'none';
+                    setTimeout(() => {
+                        document.getElementById('copiedCountProfile').style.animation = 'pulse 0.3s ease';
+                    }, 10);
+                }
+                
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.classList.remove('copied');
                 }, 2000);
+            }).catch(err => {
+                console.error('Erreur de copie:', err);
+                button.textContent = '❌ Erreur';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
             });
         }
+
+        // Animation de chargement au démarrage
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
     </script>
 </body>
 </html>
