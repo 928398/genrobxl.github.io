@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            padding: 0 20px 20px;
+            border-bottom: 2px solid #667eea;
+            margin-bottom: 20px;
+        }
+
+        .logo h2 {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: #667eea;
+        }
+
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.2);
+            border-left-color: #667eea;
+            color: #667eea;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .page {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .generator-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .generator-box h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .link-display {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        .link-display.show {
+            display: block;
+        }
+
+        .link-text {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .copy-btn {
+            background: #28a745;
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: #218838;
+        }
+
+        .info-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2>🎮 Roblox Tools</h2>
+        </div>
+        <div class="nav-item active" onclick="showPage('communaute')">Communauté</div>
+        <div class="nav-item" onclick="showPage('profil')">Profil</div>
+        <div class="nav-item" onclick="showPage('apropos')">À propos</div>
+        <div class="nav-item" onclick="showPage('aide')">Aide</div>
+    </div>
+
+    <div class="content">
+        <!-- Page Communauté -->
+        <div class="page active" id="communaute">
+            <h1>Générateur de Lien Communauté Roblox</h1>
+            <div class="generator-box">
+                <h3>📱 Générer un site communauté Roblox</h3>
+                <p class="info-text">Cliquez sur le bouton ci-dessous pour générer un lien vers la communauté Roblox.</p>
+                <button class="btn" onclick="generateCommunityLink()">Générer</button>
+                
+                <div class="link-display" id="communityLinkDisplay">
+                    <div class="link-text" id="communityLink"></div>
+                    <button class="copy-btn" onclick="copyToClipboard('community')">📋 Copier</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Profil -->
+        <div class="page" id="profil">
+            <h1>Générateur de Lien Profil Roblox</h1>
+            <div class="generator-box">
+                <h3>👤 Générer un profil Roblox</h3>
+                <p class="info-text">Cliquez sur le bouton ci-dessous pour générer un lien vers un profil Roblox.</p>
+                <button class="btn" onclick="generateProfileLink()">Générer</button>
+                
+                <div class="link-display" id="profileLinkDisplay">
+                    <div class="link-text" id="profileLink"></div>
+                    <button class="copy-btn" onclick="copyToClipboard('profile')">📋 Copier</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page À propos -->
+        <div class="page" id="apropos">
+            <h1>À propos</h1>
+            <div class="generator-box">
+                <h3>ℹ️ Informations</h3>
+                <p class="info-text">
+                    Cet outil vous permet de générer facilement des liens vers des communautés et profils Roblox.
+                    Utilisez les différentes pages de la navigation pour accéder aux générateurs.
+                </p>
+                <p class="info-text">
+                    <strong>Fonctionnalités :</strong><br>
+                    • Générateur de liens communauté Roblox<br>
+                    • Générateur de liens profil Roblox<br>
+                    • Bouton de copie en un clic<br>
+                    • Interface simple et intuitive
+                </p>
+            </div>
+        </div>
+
+        <!-- Page Aide -->
+        <div class="page" id="aide">
+            <h1>Aide</h1>
+            <div class="generator-box">
+                <h3>❓ Comment utiliser ce site</h3>
+                <p class="info-text">
+                    <strong>1. Navigation :</strong><br>
+                    Utilisez le menu à gauche pour naviguer entre les différentes pages.
+                </p>
+                <p class="info-text">
+                    <strong>2. Générer un lien :</strong><br>
+                    Cliquez sur le bouton "Générer" pour créer un lien Roblox.
+                </p>
+                <p class="info-text">
+                    <strong>3. Copier le lien :</strong><br>
+                    Une fois le lien généré, cliquez sur "Copier" pour le copier dans votre presse-papiers.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Désactiver tous les items de navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Afficher la page sélectionnée
+            document.getElementById(pageId).classList.add('active');
+            
+            // Activer l'item de navigation correspondant
+            event.target.classList.add('active');
+        }
+
+        function generateCommunityLink() {
+            const link = 'www.roblox.com/community/17463';
+            document.getElementById('communityLink').textContent = link;
+            document.getElementById('communityLinkDisplay').classList.add('show');
+        }
+
+        function generateProfileLink() {
+            const link = 'www.roblox.com/profil/74635';
+            document.getElementById('profileLink').textContent = link;
+            document.getElementById('profileLinkDisplay').classList.add('show');
+        }
+
+        function copyToClipboard(type) {
+            let text;
+            let button;
+            
+            if (type === 'community') {
+                text = document.getElementById('communityLink').textContent;
+                button = event.target;
+            } else {
+                text = document.getElementById('profileLink').textContent;
+                button = event.target;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✓ Copié !';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+  </html>
+
