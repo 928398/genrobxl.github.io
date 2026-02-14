@@ -155,6 +155,59 @@
             animation: slideIn 0.3s;
         }
 
+        .platforms-choice {
+            text-align: center;
+        }
+
+        .platforms-choice h4 {
+            color: #9d7cd8;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .platform-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .platform-choice-btn {
+            background: linear-gradient(135deg, #3d2952 0%, #2a2a4a 100%);
+            border: 2px solid rgba(138, 99, 210, 0.3);
+            border-radius: 12px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .platform-choice-btn:active {
+            transform: scale(0.95);
+        }
+
+        .platform-choice-btn.copied {
+            background: linear-gradient(135deg, #4a7c59 0%, #5a9279 100%);
+            border-color: rgba(90, 146, 121, 0.5);
+        }
+
+        .platform-emoji {
+            font-size: 28px;
+        }
+
+        .platform-name {
+            color: #b8b8d1;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .platform-choice-btn.copied .platform-name {
+            color: white;
+        }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -416,14 +469,33 @@
                 <button class="btn" onclick="generateCommunityLink()">✨ Générer</button>
                 
                 <div class="link-display" id="communityLinkDisplay">
-                    <div class="link-text" id="communityLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('community', 'www.roblox.com/community/17463')">📋 Copier le lien</button>
+                    <div class="platforms-choice">
+                        <h4>Choisir une plateforme :</h4>
+                        <div class="platform-buttons">
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('discord-community', '**www.roblox.com/community/72635**')">
+                                <span class="platform-emoji">💬</span>
+                                <span class="platform-name">Discord</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('snap-community', '_www.roblox.com/community/17463_')">
+                                <span class="platform-emoji">👻</span>
+                                <span class="platform-name">Snapchat</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('insta-community', 'www.roblox.com/community/17463')">
+                                <span class="platform-emoji">📱</span>
+                                <span class="platform-name">Instagram</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('telegram-community', '[Communauté](www.roblox.com/community/17463)')">
+                                <span class="platform-emoji">✈️</span>
+                                <span class="platform-name">Telegram</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="tip-box">
                 <div class="tip-icon">💡</div>
-                <div class="tip-text">Besoin d'un format spécial ? Consultez la page Info !</div>
+                <div class="tip-text">Générez puis choisissez votre plateforme préférée !</div>
             </div>
         </div>
 
@@ -448,14 +520,33 @@
                 <button class="btn" onclick="generateProfileLink()">✨ Générer</button>
                 
                 <div class="link-display" id="profileLinkDisplay">
-                    <div class="link-text" id="profileLink"></div>
-                    <button class="copy-btn" onclick="copyToClipboard('profile', 'www.roblox.com/profil/74635')">📋 Copier le lien</button>
+                    <div class="platforms-choice">
+                        <h4>Choisir une plateforme :</h4>
+                        <div class="platform-buttons">
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('discord-profile', '**www.roblox.com/profil/74635**')">
+                                <span class="platform-emoji">💬</span>
+                                <span class="platform-name">Discord</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('snap-profile', '_www.roblox.com/profil/74635_')">
+                                <span class="platform-emoji">👻</span>
+                                <span class="platform-name">Snapchat</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('insta-profile', 'www.roblox.com/profil/74635')">
+                                <span class="platform-emoji">📱</span>
+                                <span class="platform-name">Instagram</span>
+                            </button>
+                            <button class="platform-choice-btn" onclick="copyPlatformLink('telegram-profile', '[Profil](www.roblox.com/profil/74635)')">
+                                <span class="platform-emoji">✈️</span>
+                                <span class="platform-name">Telegram</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="tip-box">
                 <div class="tip-icon">💡</div>
-                <div class="tip-text">Pour partager sur Discord ou Snap, voir la page Info !</div>
+                <div class="tip-text">Générez puis choisissez votre plateforme préférée !</div>
             </div>
         </div>
 
@@ -703,22 +794,54 @@
         }
 
         function copyPlatformLink(type, text) {
-            let button = event.target;
+            let button = event.target.closest('.platform-choice-btn') || event.target.closest('.copy-btn-small') || event.target;
             
             navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.textContent;
-                button.textContent = '✓ Copié !';
-                button.classList.add('copied');
+                const originalHTML = button.innerHTML;
+                const originalClasses = button.className;
+                
+                // Pour les boutons de choix de plateforme
+                if (button.classList.contains('platform-choice-btn')) {
+                    button.classList.add('copied');
+                    button.innerHTML = '<span class="platform-emoji">✓</span><span class="platform-name">Copié !</span>';
+                    
+                    // Mise à jour des compteurs selon le type
+                    if (type.includes('community')) {
+                        copiedCount++;
+                        localStorage.setItem('copiedCount', copiedCount);
+                        document.getElementById('copiedCount').textContent = copiedCount;
+                        document.getElementById('copiedCount').style.animation = 'none';
+                        setTimeout(() => {
+                            document.getElementById('copiedCount').style.animation = 'pulse 0.3s ease';
+                        }, 10);
+                    } else if (type.includes('profile')) {
+                        copiedCountProfile++;
+                        localStorage.setItem('copiedCountProfile', copiedCountProfile);
+                        document.getElementById('copiedCountProfile').textContent = copiedCountProfile;
+                        document.getElementById('copiedCountProfile').style.animation = 'none';
+                        setTimeout(() => {
+                            document.getElementById('copiedCountProfile').style.animation = 'pulse 0.3s ease';
+                        }, 10);
+                    }
+                } else {
+                    // Pour les petits boutons de la page Info
+                    button.classList.add('copied');
+                    button.textContent = '✓ Copié !';
+                }
                 
                 setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('copied');
+                    button.className = originalClasses;
+                    button.innerHTML = originalHTML;
                 }, 2000);
             }).catch(err => {
                 console.error('Erreur de copie:', err);
-                button.textContent = '❌ Erreur';
+                if (button.classList.contains('platform-choice-btn')) {
+                    button.innerHTML = '<span class="platform-emoji">❌</span><span class="platform-name">Erreur</span>';
+                } else {
+                    button.textContent = '❌ Erreur';
+                }
                 setTimeout(() => {
-                    button.textContent = originalText;
+                    button.innerHTML = originalHTML;
                 }, 2000);
             });
         }
@@ -733,4 +856,3 @@
         });
     </script>
 </body>
-</html>
